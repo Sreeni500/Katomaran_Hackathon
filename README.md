@@ -1,145 +1,114 @@
-# Katomaran Face Recognition Platform 🎯
+# 🎯 Katomaran Face Recognition Platform
 
-A powerful 3-tab browser-based platform for face registration, live recognition, and AI-powered activity querying.
+A powerful **3-tab browser-based platform** for real-time **face registration**, **live recognition**, and **AI-powered activity querying** — built for speed, precision, and ease of use.
+
+---
+
+## 🧠 Live Interactive Tabs
+
+🎥 **Face Registration** | 📡 **Live Recognition** | 💬 **AI Activity Chat**
+
+> Intuitive UI with tabs that guide the user through:
+- 👤 Registering new faces
+- 👁️ Real-time face recognition
+- 🧠 Querying face activity history using natural language
+
+---
 
 ## 🚀 Features
 
-- **Face Registration**: Register new faces through webcam
-- **Live Face Recognition**: Real-time face detection and recognition
-- **AI Chat Interface**: Query face activity history using natural language
-- **Modern UI**: Responsive React.js frontend with TailwindCSS
-- **Real-time Communication**: WebSocket integration between React, Node.js, and Python
+- 🔴 **Webcam-Based Face Registration**  
+- 🟢 **Live Face Detection & Recognition**  
+- 🧠 **AI-Powered Chat to Query Activity Logs**  
+- ⚡ **Real-Time Sync via WebSockets**  
+- 💻 **Sleek React UI with TailwindCSS & Framer Motion**  
+
+---
 
 ## 🔧 Prerequisites
 
-- **Python**: Version 3.10.17
-  - Uses DeepFace and MediaPipe for face processing
-  - TensorFlow 2.10.0 and Keras 2.10.0 for deep learning
-- **Node.js**: Version 18.0.0 or higher
-- **Windows**: WSL enabled for Python operations
+- **🧠 Python**: `3.10.17`  
+  - `DeepFace` + `MediaPipe` for face detection & recognition  
+  - `TensorFlow 2.10.0` & `Keras 2.10.0` (only if using DeepFace with Facenet)  
+
+- **🟢 Node.js**: `v18.0.0` or later  
+
+- **🪟 Windows with WSL**: Required for Python runtime  
+
+---
 
 ## 📦 Tech Stack
 
-### Python Packages
-- `deepface==0.0.79`: Face recognition
-- `mediapipe`: Face detection
-- `opencv-python`: Video processing
-- `tensorflow==2.10.0`: Deep learning framework
-- `keras==2.10.0`: Neural network library
-- `fastapi`: Backend API
-- `langchain`: RAG pipeline
-- `faiss-cpu`: Vector similarity search
-- `sqlite3`: Database management
+### 🐍 Python Packages
+| Package | Purpose |
+|--------|---------|
+| `deepface==0.0.79` | Face recognition (Facenet model) |
+| `mediapipe` | Lightweight face detection |
+| `opencv-python` | Webcam interface & frame handling |
+| `tensorflow==2.10.0`, `keras==2.10.0` | Only when required |
+| `fastapi` | Backend REST API |
+| `langchain`, `faiss-cpu` | RAG pipeline for AI chat |
+| `sqlite3` | Event history storage |
 
-### JavaScript/Node.js Packages
-- `react`: Frontend framework
-- `socket.io`: Real-time communication
-- `express`: WebSocket server
-- `tailwindcss`: UI styling
-- `framer-motion`: Animations
+### 💻 JavaScript Packages
+| Package | Purpose |
+|--------|---------|
+| `react`, `tailwindcss`, `framer-motion` | UI/UX |
+| `express`, `socket.io` | Backend server & WebSocket bridge |
 
-## 🛠️ Installation & Setup
+---
 
-1. **Clone the Repository**
-   ```bash
-   git clone https://github.com/yourusername/katomaran-face-platform.git
-   cd katomaran-face-platform
-   ```
+## 📂 Core Python Logic – `face_and_identification.py`
 
-2. **Run the Setup Script**
-   ```powershell
-   # Open PowerShell as Administrator
-   Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
-   .\execute.ps1
-   ```
+This file handles both **face registration** and **recognition**:
 
-   The script will:
-   - Check Python and Node.js installations
-   - Install required Python packages
-   - Install Node.js dependencies
-   - Create necessary directories
-   - Start the services based on your choice
+```python
+capture_image(name)     # Opens webcam and captures an image
+recognize_face_from_frame(frame)  # Compares captured frame with registered faces
 
-## 🎮 Usage Options
 
-The platform can be started in three modes:
+👇 Sample Usage (Command Line)
 
-1. **Test Face Detection**
-   - Tests webcam and face detection functionality
-   - Useful for verifying system setup
+$ python face_and_identification.py
 
-2. **Start Servers Only**
-   - Launches Python FastAPI backend (Port 8001)
-   - Starts Node.js WebSocket server (Port 3002)
-   - Ideal for development and testing
+Then choose:
 
-3. **Complete System**
-   - Starts all servers
-   - Launches React frontend (Port 3000)
-   - Full production mode
+    1: Register a face — saves image to registered_faces/
 
-## 💻 Accessing the Platform
+    2: Recognize a face — scans webcam & finds matches
 
-After starting the complete system:
+✅ Uses DeepFace with Facenet model (no dlib or cmake)
+✅ Compatible with execute.ps1 startup flow
+🛠️ Installation & Setup
 
-1. Open your browser and navigate to:
-   - Frontend UI: http://localhost:3000
-   - API Documentation: http://localhost:8001/docs
-   - WebSocket Server: ws://localhost:3002
+    Clone the Repo
 
-2. Use the tabs to:
-   - Register new faces
-   - Monitor live recognition
-   - Query face activity through AI chat
+git clone https://github.com/yourusername/katomaran-face-platform.git
+cd katomaran-face-platform
 
-## 📝 Important Notes
+Run Setup Script
 
-1. **Face Registration**:
-   - Ensure good lighting
-   - Position face centrally in frame
-   - Use "Force Register" option if detection fails
+    # Run in PowerShell (as Admin)
+    Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+    .\execute.ps1
 
-2. **Live Recognition**:
-   - Maintains real-time WebSocket connection
-   - Shows confidence scores for matches
-   - Logs all recognition events
+    This script:
 
-3. **AI Querying**:
-   - Uses natural language processing
-   - Searches face activity history
-   - Provides context-aware responses
+    ✅ Installs all Python & Node.js dependencies
 
-## 🔍 Troubleshooting
+    ✅ Sets up folders like registered_faces/
 
-1. **Face Detection Issues**:
-   - Check lighting conditions
-   - Ensure face is clearly visible
-   - Verify webcam permissions
+    ✅ Starts chosen services (Test Mode / Servers / Full Platform)
 
-2. **Connection Errors**:
-   - Confirm all ports are available
-   - Check if services are running
-   - Verify WebSocket connection
+🎮 Usage Modes
+Mode	Description
+🔍 Test Face Detection	Webcam + MediaPipe validation
+🔧 Start Servers Only	FastAPI (8001) + Node (3002)
+🚀 Complete System	Full platform + React UI (3000)
+💻 Accessing the Platform
 
-3. **Package Conflicts**:
-   - Use specified versions of TensorFlow and Keras
-   - Avoid installing multiple versions
-   - Follow the installation order in execute.ps1
+Once running:
 
-## 🤝 Contributing
+    🌐 Frontend: http://localhost:3000
 
-1. Fork the repository
-2. Create your feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 🙏 Acknowledgments
-
-- DeepFace library contributors
-- MediaPipe team
-- OpenRouter for AI capabilities 
+    📘 API Docs: http
